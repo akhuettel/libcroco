@@ -22,7 +22,8 @@ foreach(source ${testprogs})
     )
 
     target_link_libraries(${source}
-        croco_LIB
+        ${GLIB_LDFLAGS}
+        croco
     )
 endforeach()
 

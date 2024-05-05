@@ -66,9 +66,14 @@ set(libcroco_SRC
     ${libcroco_headers}
 )
 
-add_library(croco_LIB STATIC "${libcroco_SRC}")
+if (LIBCROCO_STANDALONE)
+add_library(croco "${libcroco_SRC}")
+else()
+add_library(croco STATIC "${libcroco_SRC}")
+endif()
 
-target_include_directories(croco_LIB
+
+target_include_directories(croco
     PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}
     ${LIBXML_INCLUDE_DIRS}
@@ -76,10 +81,15 @@ target_include_directories(croco_LIB
     ${GLIB_INCLUDE_DIRS}
 )
 
-target_link_libraries(croco_LIB
+target_link_libraries(croco
     PRIVATE
     ${GLIB_LDFLAGS}
     INTERFACE
     ${LIBXML_LDFLAGS}
     m
+)
+
+install(
+    TARGETS
+    croco
 )

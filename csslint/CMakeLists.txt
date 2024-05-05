@@ -12,5 +12,6 @@ target_include_directories(${csslint_EXE}
 
 target_link_libraries(${csslint_EXE}
     PRIVATE
-    croco_LIB
+    ${GLIB_LDFLAGS}
+    croco
 )
